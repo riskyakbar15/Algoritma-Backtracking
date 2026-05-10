@@ -1,86 +1,79 @@
-# Algoritma Knapsack - Pemilihan Komponen PC
+<!-- Professional README for Algoritma-Backtracking -->
 
-Program ini menyelesaikan masalah **0/1 Knapsack Problem** untuk memilih komponen PC dengan performa maksimum dalam batasan daya **500 Watt**.
+# Algoritma Backtracking — Pemilihan Komponen PC
 
-## Deskripsi Masalah
+Ringkasan terstruktur dan profesional untuk implementasi contoh penyelesaian masalah knapsack (0/1) menggunakan pendekatan Brute Force dan Dynamic Programming.
 
-Diberikan sejumlah komponen PC dengan nilai daya (Watt) dan performa masing-masing. Tujuannya adalah memilih kombinasi komponen yang menghasilkan **performa tertinggi** tanpa melebihi kapasitas daya yang tersedia.
+**Status:** Siap digunakan untuk demo dan studi kasus.
 
-## Algoritma
+## Deskripsi
 
-### 1. Brute Force (`BruteForce.py`)
+Repositori ini berisi implementasi sederhana untuk memecahkan masalah pemilihan komponen PC dengan tujuan memaksimalkan performa tanpa melebihi kapasitas daya (contoh: 500 W). Terdapat dua pendekatan utama:
 
-- Mengecek **semua kemungkinan kombinasi** komponen (2^n kombinasi)
-- Memilih kombinasi dengan performa tertinggi yang tidak melebihi batas daya
-- **Kompleksitas Waktu:** O(2^n)
-- Cocok untuk jumlah item sedikit
+- Brute Force — eksplorasi semua kombinasi
+- Dynamic Programming — solusi efisien berbasis tabel DP
 
-### 2. Dynamic Programming (`DynamicProgramming.py`)
+Kedua skrip dimaksudkan sebagai bahan pembelajaran dan perbandingan kompleksitas.
 
-- Menggunakan **tabel DP** untuk menyimpan solusi subproblem
-- Menghindari perhitungan berulang dengan memoization
-- **Kompleksitas Waktu:** O(n × W)
-- Lebih efisien untuk dataset besar
+## Cepat Mulai
 
-## Data Komponen
+Prasyarat:
 
-| No  | Komponen               | Daya (W) | Performa |
-| --- | ---------------------- | -------- | -------- |
-| 1   | CPU Intel i7           | 95       | 85       |
-| 2   | CPU Cooler Tower       | 15       | 20       |
-| 3   | GPU RTX 3060           | 170      | 120      |
-| 4   | GPU RTX 4060 Ti        | 220      | 150      |
-| 5   | RAM 16GB DDR4          | 10       | 30       |
-| 6   | SSD NVMe 1TB           | 8        | 25       |
-| 7   | HDD 2TB                | 12       | 18       |
-| 8   | Motherboard ATX Gaming | 70       | 60       |
-| 9   | PSU Modular            | 5        | 12       |
-| 10  | RGB Fan Kit            | 20       | 22       |
+- Python 3.8 atau lebih baru
 
-**Kapasitas Daya Maksimum:** 500 Watt
-
-## Cara Menjalankan
-
-Pastikan Python sudah terinstall, lalu jalankan:
+Menjalankan contoh:
 
 ```bash
-# Brute Force
 python BruteForce.py
-
-# Dynamic Programming
 python DynamicProgramming.py
 ```
 
-## Contoh Output
+## Struktur Proyek
 
-```
-=== Brute Force ===
+- `BruteForce.py` — implementasi pemeriksaan semua kombinasi (2^n)
+- `DynamicProgramming.py` — implementasi solusi O(n × W)
+- `README.md` — dokumentasi ini
+
+Tambahkan file data atau modul tambahan sesuai kebutuhan untuk eksperimen lebih lanjut.
+
+## Penjelasan Singkat Algoritma
+
+- Brute Force: memastikan solusi optimal dengan memeriksa semua subset, cocok untuk n kecil. Kompleksitas waktu eksponensial.
+- Dynamic Programming: membangun solusi dari subproblem dengan tabel dua dimensi (item × kapasitas), memberikan kompleksitas waktu O(n × W).
+
+## Contoh Penggunaan
+
+Jalankan salah satu skrip di terminal. Output akan menampilkan total performa, total daya, dan daftar komponen terpilih.
+
+Contoh (format output bervariasi sesuai implementasi):
+
+```contoh
 Performa maksimum: 372
 Total daya: 395 W
-Item terpilih:
-- CPU Intel i7 ( 95 W, 85 )
-- CPU Cooler Tower ( 15 W, 20 )
-- GPU RTX 3060 ( 170 W, 120 )
-- RAM 16GB DDR4 ( 10 W, 30 )
-- SSD NVMe 1TB ( 8 W, 25 )
-- HDD 2TB ( 12 W, 18 )
-- Motherboard ATX Gaming ( 70 W, 60 )
-- PSU Modular ( 5 W, 12 )
-
-Total kombinasi yang diperiksa: 1024
+Item terpilih: [CPU Intel i7, GPU RTX 3060, RAM 16GB, ...]
 ```
 
-## Perbandingan Algoritma
+## Kontribusi
 
-| Aspek               | Brute Force               | Dynamic Programming      |
-| ------------------- | ------------------------- | ------------------------ |
-| Kompleksitas Waktu  | O(2^n)                    | O(n × W)                 |
-| Kompleksitas Ruang  | O(1)                      | O(n × W)                 |
-| Kombinasi Diperiksa | 1024                      | -                        |
-| Kelebihan           | Sederhana, mudah dipahami | Efisien untuk data besar |
-| Kekurangan          | Lambat untuk n besar      | Membutuhkan memori lebih |
+Kontribusi diterima melalui Pull Request. Panduan singkat:
 
-## Teknologi
+1. Fork repositori ini
+2. Buat branch deskriptif (`feat/`, `fix/`, `ci/`)
+3. Tambahkan perubahan dan tes minimal jika perlu
+4. Buka Pull Request dengan deskripsi perubahan
 
-- Python 3.x
-- Library: `itertools` (untuk Brute Force)
+Pastikan kode mengikuti gaya Python standar (PEP 8) dan beri komentar yang cukup untuk fungsi utama.
+
+## Lisensi
+
+Jika Anda ingin menambahkan lisensi, tambahkan file `LICENSE` di root. Saat ini tidak ada lisensi resmi — gunakan sesuai kebutuhan atau hubungi pemilik repositori.
+
+## Kontak
+
+Pemilik: GitHub — `riskyakbar15`
+
+Untuk saran fitur atau laporan bug, silakan buka issue di repositori.
+
+---
+
+_Dokumentasi disusun untuk memudahkan pembaca memahami tujuan repository dan cara menjalankan contoh. Ingin saya tambahkan badge, contoh input/output lebih lengkap, atau file LICENSE?_
