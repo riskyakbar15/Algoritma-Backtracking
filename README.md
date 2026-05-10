@@ -1,19 +1,10 @@
 <!-- Professional README for Algoritma-Backtracking -->
 
-# Algoritma Backtracking — Pemilihan Komponen PC
+# Algoritma Knapsack (0/1) — Pemilihan Komponen PC
 
-Ringkasan terstruktur dan profesional untuk implementasi contoh penyelesaian masalah knapsack (0/1) menggunakan pendekatan Brute Force dan Dynamic Programming.
+Dokumentasi ini menjelaskan dua implementasi untuk menyelesaikan masalah 0/1 Knapsack (pemilihan komponen PC berdasarkan daya dan performa): satu pendekatan eksahustif (`BruteForce.py`) dan satu implementasi efisien berbasis Dynamic Programming (`DynamicProgramming.py`).
 
-**Status:** Siap digunakan untuk demo dan studi kasus.
-
-## Deskripsi
-
-Repositori ini berisi implementasi sederhana untuk memecahkan masalah pemilihan komponen PC dengan tujuan memaksimalkan performa tanpa melebihi kapasitas daya (contoh: 500 W). Terdapat dua pendekatan utama:
-
-- Brute Force — eksplorasi semua kombinasi
-- Dynamic Programming — solusi efisien berbasis tabel DP
-
-Kedua skrip dimaksudkan sebagai bahan pembelajaran dan perbandingan kompleksitas.
+**Status:** Demo / bahan pembelajaran.
 
 ## Cepat Mulai
 
@@ -30,50 +21,75 @@ python DynamicProgramming.py
 
 ## Struktur Proyek
 
-- `BruteForce.py` — implementasi pemeriksaan semua kombinasi (2^n)
-- `DynamicProgramming.py` — implementasi solusi O(n × W)
+- `BruteForce.py` — pemeriksaan semua kombinasi menggunakan `itertools.combinations` (eksahustif)
+- `DynamicProgramming.py` — implementasi 0/1 Knapsack klasik menggunakan tabel DP
 - `README.md` — dokumentasi ini
 
-Tambahkan file data atau modul tambahan sesuai kebutuhan untuk eksperimen lebih lanjut.
+## Implementasi Aktual
 
-## Penjelasan Singkat Algoritma
+Berikut penjelasan fungsi dan keluaran masing-masing skrip sesuai kode di repositori:
 
-- Brute Force: memastikan solusi optimal dengan memeriksa semua subset, cocok untuk n kecil. Kompleksitas waktu eksponensial.
-- Dynamic Programming: membangun solusi dari subproblem dengan tabel dua dimensi (item × kapasitas), memberikan kompleksitas waktu O(n × W).
+- `BruteForce.py`
+  - Pendekatan: eksplorasi semua subset kombinasi komponen untuk menemukan kombinasi optimal.
+  - Cara kerja: iterasi semua kombinasi ukuran 1..n, hitung total daya dan performa, pilih kombinasi terbaik yang tidak melebihi kapasitas `W`.
+  - Output yang dicetak: `Performa maksimum`, `Total daya`, daftar item terpilih, dan `Total kombinasi yang diperiksa` (ditampilkan sebagai `2**n`).
+  - Kompleksitas: waktu O(2^n). Ini bukan implementasi backtracking dengan pruning — semua subset diperiksa.
 
-## Contoh Penggunaan
+- `DynamicProgramming.py`
+  - Pendekatan: 0/1 Knapsack klasik menggunakan tabel DP ukuran (n+1) × (W+1).
+  - Fungsi kunci: `knapsack_dp(weights, profits, W)` mengembalikan `(max_profit, chosen_indices, total_weight)`.
+  - Cara kerja: bangun tabel DP, kemudian rekonstruksi item terpilih dari tabel untuk mendapatkan indeks item yang dipilih.
+  - Output yang dicetak: `Performa maksimum`, `Total daya`, dan daftar item terpilih.
+  - Kompleksitas: waktu O(n × W), ruang O(n × W). Cocok ketika bobot dan kapasitas berupa bilangan bulat moderat.
 
-Jalankan salah satu skrip di terminal. Output akan menampilkan total performa, total daya, dan daftar komponen terpilih.
+## Contoh Keluaran
 
-Contoh (format output bervariasi sesuai implementasi):
+Format keluaran yang akan muncul saat menjalankan skrip (nyata dari implementasi):
 
-```contoh
+`BruteForce.py` (contoh):
+
+```contoh bf
+=== Brute Force ===
 Performa maksimum: 372
 Total daya: 395 W
-Item terpilih: [CPU Intel i7, GPU RTX 3060, RAM 16GB, ...]
+Item terpilih:
+- CPU Intel i7 ( 95 W, 85 )
+- CPU Cooler Tower ( 15 W, 20 )
+...
+
+Total kombinasi yang diperiksa: 1024
 ```
+
+`DynamicProgramming.py` (contoh):
+
+```contoh dp
+=== Dynamic Programming ===
+Performa maksimum: 372
+Total daya: 395 W
+Item terpilih:
+- CPU Intel i7 ( 95 W, 85 )
+- GPU RTX 3060 ( 170 W, 120 )
+...
+```
+
+## Catatan & Rekomendasi
+
+- Jika tujuan Anda adalah mempelajari backtracking dengan pruning (branch-and-bound), `BruteForce.py` dapat diadaptasi menjadi versi backtracking yang memangkas cabang saat akumulasi daya melebihi batas.
+- Untuk eksperimen dengan kapasitas besar, gunakan `DynamicProgramming.py` jika bobot dapat diperlakukan sebagai integer; jika kapasitas terlalu besar untuk DP, pertimbangkan pendekatan greedy (heuristik) atau algoritma approximate/branch-and-bound.
 
 ## Kontribusi
 
-Kontribusi diterima melalui Pull Request. Panduan singkat:
+Kontribusi diterima melalui Pull Request. Langkah singkat:
 
-1. Fork repositori ini
-2. Buat branch deskriptif (`feat/`, `fix/`, `ci/`)
-3. Tambahkan perubahan dan tes minimal jika perlu
-4. Buka Pull Request dengan deskripsi perubahan
+1. Fork repositori
+2. Buat branch deskriptif (`feat/`, `fix/`)
+3. Tambahkan perubahan dan tes minimal
+4. Buka Pull Request
 
-Pastikan kode mengikuti gaya Python standar (PEP 8) dan beri komentar yang cukup untuk fungsi utama.
-
-## Lisensi
-
-Jika Anda ingin menambahkan lisensi, tambahkan file `LICENSE` di root. Saat ini tidak ada lisensi resmi — gunakan sesuai kebutuhan atau hubungi pemilik repositori.
+Ikuti gaya Python (PEP 8) dan tambahkan dokumentasi untuk perubahan besar.
 
 ## Kontak
 
-Pemilik: GitHub — `riskyakbar15`
-
-Untuk saran fitur atau laporan bug, silakan buka issue di repositori.
+GitHub — `riskyakbar15`
 
 ---
-
-_Dokumentasi disusun untuk memudahkan pembaca memahami tujuan repository dan cara menjalankan contoh. Ingin saya tambahkan badge, contoh input/output lebih lengkap, atau file LICENSE?_
