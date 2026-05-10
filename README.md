@@ -2,7 +2,7 @@
 
 # Algoritma Knapsack (0/1) — Pemilihan Komponen PC
 
-Dokumentasi ini menjelaskan dua implementasi untuk menyelesaikan masalah 0/1 Knapsack (pemilihan komponen PC berdasarkan daya dan performa): satu pendekatan eksahustif (`BruteForce.py`) dan satu implementasi efisien berbasis Dynamic Programming (`DynamicProgramming.py`).
+Dokumentasi ini menjelaskan tiga implementasi untuk menyelesaikan masalah 0/1 Knapsack (pemilihan komponen PC berdasarkan daya dan performa): satu pendekatan eksahustif (`BruteForce.py`), satu implementasi efisien berbasis Dynamic Programming (`DynamicProgramming.py`), dan satu pendekatan Branch and Bound (`BranchAndBound.py`).
 
 **Status:** Demo / bahan pembelajaran.
 
@@ -17,12 +17,14 @@ Menjalankan contoh:
 ```bash
 python BruteForce.py
 python DynamicProgramming.py
+python BranchAndBound.py
 ```
 
 ## Struktur Proyek
 
 - `BruteForce.py` — pemeriksaan semua kombinasi menggunakan `itertools.combinations` (eksahustif)
 - `DynamicProgramming.py` — implementasi 0/1 Knapsack klasik menggunakan tabel DP
+- `BranchAndBound.py` — pencarian dengan pruning menggunakan batas atas berbasis fractional knapsack
 - `README.md` — dokumentasi ini
 
 ## Implementasi Aktual
@@ -42,6 +44,12 @@ Berikut penjelasan fungsi dan keluaran masing-masing skrip sesuai kode di reposi
   - Output yang dicetak: `Performa maksimum`, `Total daya`, dan daftar item terpilih.
   - Kompleksitas: waktu O(n × W), ruang O(n × W). Cocok ketika bobot dan kapasitas berupa bilangan bulat moderat.
 
+- `BranchAndBound.py`
+  - Pendekatan: depth-first search dengan pruning berdasarkan batas atas dari fractional knapsack.
+  - Cara kerja: item diurutkan berdasarkan rasio performa per daya, lalu cabang yang tidak mungkin mengalahkan solusi terbaik saat ini dipangkas.
+  - Output yang dicetak: `Performa maksimum`, `Total daya`, dan daftar item terpilih.
+  - Kompleksitas: tetap eksponensial pada kasus terburuk, tetapi biasanya jauh lebih cepat daripada brute force karena pruning.
+
 ## Contoh Keluaran
 
 Format keluaran yang akan muncul saat menjalankan skrip (nyata dari implementasi):
@@ -50,8 +58,8 @@ Format keluaran yang akan muncul saat menjalankan skrip (nyata dari implementasi
 
 ```contoh bf
 === Brute Force ===
-Performa maksimum: 372
-Total daya: 395 W
+Performa maksimum: 422
+Total daya: 455 W
 Item terpilih:
 - CPU Intel i7 ( 95 W, 85 )
 - CPU Cooler Tower ( 15 W, 20 )
@@ -64,11 +72,23 @@ Total kombinasi yang diperiksa: 1024
 
 ```contoh dp
 === Dynamic Programming ===
-Performa maksimum: 372
-Total daya: 395 W
+Performa maksimum: 422
+Total daya: 455 W
 Item terpilih:
 - CPU Intel i7 ( 95 W, 85 )
-- GPU RTX 3060 ( 170 W, 120 )
+- GPU RTX 4060 Ti ( 220 W, 150 )
+...
+```
+
+`BranchAndBound.py` (contoh):
+
+```contoh bnb
+=== Branch and Bound ===
+Performa maksimum: 422
+Total daya: 455 W
+Item terpilih:
+- CPU Intel i7 ( 95 W, 85 )
+- CPU Cooler Tower ( 15 W, 20 )
 ...
 ```
 
