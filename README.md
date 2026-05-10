@@ -20,6 +20,7 @@ python DynamicProgramming.py
 python BranchAndBound.py
 python MeetInTheMiddle.py
 python UserInputKnapsack.py
+python Benchmark.py
 ```
 
 ## Struktur Proyek
