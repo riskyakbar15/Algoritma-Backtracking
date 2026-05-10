@@ -2,7 +2,7 @@
 
 # Algoritma Knapsack (0/1) — Pemilihan Komponen PC
 
-Dokumentasi ini menjelaskan tiga implementasi untuk menyelesaikan masalah 0/1 Knapsack (pemilihan komponen PC berdasarkan daya dan performa): satu pendekatan eksahustif (`BruteForce.py`), satu implementasi efisien berbasis Dynamic Programming (`DynamicProgramming.py`), dan satu pendekatan Branch and Bound (`BranchAndBound.py`).
+Dokumentasi ini menjelaskan empat implementasi untuk menyelesaikan masalah 0/1 Knapsack (pemilihan komponen PC berdasarkan daya dan performa): satu pendekatan eksahustif (`BruteForce.py`), satu implementasi efisien berbasis Dynamic Programming (`DynamicProgramming.py`), satu pendekatan Branch and Bound (`BranchAndBound.py`), dan satu pendekatan Meet-in-the-Middle (`MeetInTheMiddle.py`).
 
 **Status:** Demo / bahan pembelajaran.
 
@@ -18,6 +18,7 @@ Menjalankan contoh:
 python BruteForce.py
 python DynamicProgramming.py
 python BranchAndBound.py
+python MeetInTheMiddle.py
 ```
 
 ## Struktur Proyek
@@ -25,6 +26,7 @@ python BranchAndBound.py
 - `BruteForce.py` — pemeriksaan semua kombinasi menggunakan `itertools.combinations` (eksahustif)
 - `DynamicProgramming.py` — implementasi 0/1 Knapsack klasik menggunakan tabel DP
 - `BranchAndBound.py` — pencarian dengan pruning menggunakan batas atas berbasis fractional knapsack
+- `MeetInTheMiddle.py` — enumerasi dua bagian subset lalu digabungkan dengan pencarian biner
 - `README.md` — dokumentasi ini
 
 ## Implementasi Aktual
@@ -49,6 +51,12 @@ Berikut penjelasan fungsi dan keluaran masing-masing skrip sesuai kode di reposi
   - Cara kerja: item diurutkan berdasarkan rasio performa per daya, lalu cabang yang tidak mungkin mengalahkan solusi terbaik saat ini dipangkas.
   - Output yang dicetak: `Performa maksimum`, `Total daya`, dan daftar item terpilih.
   - Kompleksitas: tetap eksponensial pada kasus terburuk, tetapi biasanya jauh lebih cepat daripada brute force karena pruning.
+
+- `MeetInTheMiddle.py`
+  - Pendekatan: membagi item menjadi dua bagian, enumerasi semua subset tiap bagian, lalu menggabungkan hasil terbaik dengan pencarian biner.
+  - Cara kerja: subset dari bagian kanan diringkas menjadi daftar subset dominan, kemudian tiap subset bagian kiri dipasangkan dengan subset kanan terbaik yang masih muat.
+  - Output yang dicetak: `Performa maksimum`, `Total daya`, dan daftar item terpilih.
+  - Kompleksitas: sekitar O(2^(n/2) log 2^(n/2)), efektif untuk jumlah item menengah.
 
 ## Contoh Keluaran
 
@@ -92,10 +100,33 @@ Item terpilih:
 ...
 ```
 
+`MeetInTheMiddle.py` (contoh):
+
+```contoh mitm
+=== Meet in the Middle ===
+Performa maksimum: 422
+Total daya: 455 W
+Item terpilih:
+- CPU Intel i7 ( 95 W, 85 )
+- CPU Cooler Tower ( 15 W, 20 )
+...
+```
+
 ## Catatan & Rekomendasi
 
 - Jika tujuan Anda adalah mempelajari backtracking dengan pruning (branch-and-bound), `BruteForce.py` dapat diadaptasi menjadi versi backtracking yang memangkas cabang saat akumulasi daya melebihi batas.
 - Untuk eksperimen dengan kapasitas besar, gunakan `DynamicProgramming.py` jika bobot dapat diperlakukan sebagai integer; jika kapasitas terlalu besar untuk DP, pertimbangkan pendekatan greedy (heuristik) atau algoritma approximate/branch-and-bound.
+
+## Perbandingan Kompleksitas
+
+| Algoritma           | Waktu                      | Ruang              | Catatan                                              |
+| ------------------- | -------------------------- | ------------------ | ---------------------------------------------------- |
+| Brute Force         | O(2^n)                     | O(1)               | Memeriksa semua subset secara penuh                  |
+| Dynamic Programming | O(n × W)                   | O(n × W)           | Cocok untuk kapasitas integer moderat                |
+| Branch and Bound    | O(2^n) pada kasus terburuk | O(n) sampai O(2^n) | Biasanya lebih cepat dari brute force karena pruning |
+| Meet-in-the-Middle  | O(2^(n/2) log 2^(n/2))     | O(2^(n/2))         | Efektif untuk jumlah item menengah                   |
+
+Ringkasnya: brute force paling mudah dipahami, DP paling stabil untuk kapasitas integer, branch and bound lebih efisien saat pruning efektif, dan meet-in-the-middle berguna saat jumlah item menengah tetapi brute force terlalu mahal.
 
 ## Kontribusi
 
