@@ -2,7 +2,7 @@
 
 # Algoritma Knapsack (0/1) — Pemilihan Komponen PC
 
-Dokumentasi ini menjelaskan empat implementasi untuk menyelesaikan masalah 0/1 Knapsack (pemilihan komponen PC berdasarkan daya dan performa): satu pendekatan eksahustif (`BruteForce.py`), satu implementasi efisien berbasis Dynamic Programming (`DynamicProgramming.py`), satu pendekatan Branch and Bound (`BranchAndBound.py`), dan satu pendekatan Meet-in-the-Middle (`MeetInTheMiddle.py`).
+Dokumentasi ini menjelaskan lima implementasi untuk menyelesaikan masalah 0/1 Knapsack (pemilihan komponen PC berdasarkan daya dan performa): satu pendekatan eksahustif (`BruteForce.py`), satu implementasi efisien berbasis Dynamic Programming (`DynamicProgramming.py`), satu pendekatan Branch and Bound (`BranchAndBound.py`), satu pendekatan Meet-in-the-Middle (`MeetInTheMiddle.py`), dan satu versi input user (`UserInputKnapsack.py`).
 
 **Status:** Demo / bahan pembelajaran.
 
@@ -19,6 +19,7 @@ python BruteForce.py
 python DynamicProgramming.py
 python BranchAndBound.py
 python MeetInTheMiddle.py
+python UserInputKnapsack.py
 ```
 
 ## Struktur Proyek
@@ -27,6 +28,7 @@ python MeetInTheMiddle.py
 - `DynamicProgramming.py` — implementasi 0/1 Knapsack klasik menggunakan tabel DP
 - `BranchAndBound.py` — pencarian dengan pruning menggunakan batas atas berbasis fractional knapsack
 - `MeetInTheMiddle.py` — enumerasi dua bagian subset lalu digabungkan dengan pencarian biner
+- `UserInputKnapsack.py` — versi interaktif untuk memasukkan data komponen sendiri
 - `README.md` — dokumentasi ini
 
 ## Implementasi Aktual
@@ -57,6 +59,12 @@ Berikut penjelasan fungsi dan keluaran masing-masing skrip sesuai kode di reposi
   - Cara kerja: subset dari bagian kanan diringkas menjadi daftar subset dominan, kemudian tiap subset bagian kiri dipasangkan dengan subset kanan terbaik yang masih muat.
   - Output yang dicetak: `Performa maksimum`, `Total daya`, dan daftar item terpilih.
   - Kompleksitas: sekitar O(2^(n/2) log 2^(n/2)), efektif untuk jumlah item menengah.
+
+- `UserInputKnapsack.py`
+  - Pendekatan: input interaktif dari user lalu diselesaikan dengan dynamic programming.
+  - Cara kerja: user memasukkan jumlah komponen, kapasitas daya, nama komponen, bobot, dan nilai performa, lalu program menghitung kombinasi optimal.
+  - Output yang dicetak: `Performa maksimum`, `Total daya`, dan daftar item terpilih.
+  - Kompleksitas: sama seperti DP, yaitu waktu O(n × W) dan ruang O(n × W).
 
 ## Contoh Keluaran
 
@@ -111,6 +119,8 @@ Item terpilih:
 - CPU Cooler Tower ( 15 W, 20 )
 ...
 ```
+
+`UserInputKnapsack.py` berjalan interaktif, jadi hasilnya bergantung pada data yang dimasukkan user.
 
 ## Catatan & Rekomendasi
 
