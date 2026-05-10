@@ -141,6 +141,6 @@ Ikuti gaya Python (PEP 8) dan tambahkan dokumentasi untuk perubahan besar.
 
 ## Kontak
 
-GitHub — [riskyakbar15/Deteksi-Kata-Terlarang](https://github.com/riskyakbar15/Deteksi-Kata-Terlarang)
+GitHub — [riskyakbar15/knapsack-pc-builder](https://github.com/riskyakbar15/knapsack-pc-builder)
 
 ---
