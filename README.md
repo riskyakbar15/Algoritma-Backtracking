@@ -150,8 +150,6 @@ Kontribusi diterima melalui Pull Request. Langkah singkat:
 
 Ikuti gaya Python (PEP 8) dan tambahkan dokumentasi untuk perubahan besar.
 
-## Kontak
-
-GitHub — [riskyakbar15/knapsack-pc-builder](https://github.com/riskyakbar15/knapsack-pc-builder)
-
 ---
+
+Made With ❤️ By [riskyakbar15](https://github.com/riskyakbar15) For Education.
